@@ -1,5 +1,7 @@
 <?php
 require_once('runthered/http_gateway.php');
+//If using Composer then you don't need the above, and can instead just use autoload.php:
+//require __DIR__ . '/vendor/autoload.php';
 use RtrHttpGateway\HttpGatewayApi;
 use RtrHttpGateway\HttpGatewayException;
 

@@ -1,5 +1,7 @@
 <?php
 require_once('runthered/push_api.php');
+//If using Composer then you don't need the above, and can instead just use autoload.php:
+//require __DIR__ . '/vendor/autoload.php';
 use RtrPushApi\PushApi;
 use RtrPushApi\PushApiException;
 
