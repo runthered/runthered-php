@@ -1,0 +1,19 @@
+{
+    "name": "runthered/runthered",
+    "type": "library",
+    "description": "Run The Red PHP Wrapper libraries for public APIs",
+    "keywords": ["rtr","runthered"],
+    "homepage": "https://github.com/runthered/runthered-php.git",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Finn Colman",
+            "email": "finn.colman@runthered.com",
+            "homepage": "http://runthered.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    }
+}
