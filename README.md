@@ -1,7 +1,7 @@
 ## Installation
 You can install **runthered-php** via composer or by downloading the source.
 
-The composer URL is https://packagist.org/packages/runthered/runthered
+The Packagist URL is https://packagist.org/packages/runthered/runthered
 
 ## Overview
 
