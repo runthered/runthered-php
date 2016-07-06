@@ -80,5 +80,32 @@ try{
 ?>
 
 ```
+HTTP Gateway send bulk MT messages
+```php
+<?php
+// require __DIR__ . '/vendor/autoload.php'; if using Composer, require_once('runthered/http_gateway.php'); otherwise
+//require_once('http_gateway.php');
+require __DIR__ . '/vendor/autoload.php';
+use RtrHttpGateway\HttpGatewayApi;
+use RtrHttpGateway\HttpGatewayException;
+
+$username = 'snoop7';
+$password = 'sboop7';
+$service_key = 'snop7';
+$httpGatewayApi = new HttpGatewayApi($username,$password,$service_key);
+
+$to_numbers = array();
+for($i=0; $i<100; $i++){
+	array_push($to_numbers, '64251234567');
+}
+$responses = $httpGatewayApi->pushToMany($message, $to_numbers, $from);
+foreach($responses as $response){
+	echo "The response data is response " . $response->response . " and http code " . $response->http_code . "\n";
+}
+
+?>
+
+
+```
 ## Prerequisites
 * PHP >= 5.3.0
