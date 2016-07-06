@@ -23,6 +23,19 @@ try{
 	echo "The status is $dlr_response->status\n";
 	echo "The reason is $dlr_response->reason_code\n";
 	echo "The dlr id is $dlr_response->id\n";
+
+
+	// send messages in bulk
+	$to_numbers = array();
+	for($i=0; $i<100; $i++){
+        	array_push($to_numbers, '64251234567');
+	}	
+	$responses = $httpGatewayApi->pushToMany($message, $to_numbers, $from);
+	foreach($responses as $response){
+        	echo "The response data is response " . $response->response . " and http code " . $response->http_code . "\n";
+	}
+
+	
 } catch (HttpGatewayException $e){
 	echo 'Caught exception: ',  $e->getMessage(), " and code ", $e->getCode(), "\n";
 }
