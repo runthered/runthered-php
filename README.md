@@ -98,6 +98,9 @@ $to_numbers = array();
 for($i=0; $i<100; $i++){
 	array_push($to_numbers, '64251234567');
 }
+$from = '2059';
+$message = 'Hello World!';
+
 $responses = $httpGatewayApi->pushToMany($message, $to_numbers, $from);
 foreach($responses as $response){
 	echo "The response data is response " . $response->response . " and http code " . $response->http_code . "\n";
