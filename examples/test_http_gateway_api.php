@@ -35,6 +35,12 @@ try{
         	echo "The response data is response " . $response->response . " and http code " . $response->http_code . "\n";
 	}
 
+	// send messages in bulk using POST, slower but more secure
+	$responses = $httpGatewayApi->pushToManyPost($message, $to_numbers, $from);
+        foreach($responses as $response){
+                echo "The response data is response " . $response->response . " and http code " . $response->http_code . "\n";
+        }
+
 	
 } catch (HttpGatewayException $e){
 	echo 'Caught exception: ',  $e->getMessage(), " and code ", $e->getCode(), "\n";

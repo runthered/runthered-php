@@ -103,6 +103,13 @@ foreach($responses as $response){
 	echo "The response data is response " . $response->response . " and http code " . $response->http_code . "\n";
 }
 
+// alternatively use the pushToManyPost function which uses POST instead of GET, which is slower but more secure
+$responses = $httpGatewayApi->pushToManyPost($message, $to_numbers, $from);
+foreach($responses as $response){
+	echo "The response data is response " . $response->response . " and http code " . $response->http_code . "\n";
+}
+
+
 ?>
 
 

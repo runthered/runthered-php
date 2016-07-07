@@ -62,6 +62,32 @@ class HTTPGatewayTest extends \PHPUnit_Framework_TestCase{
 		}
         }
 
+	public function testHTTPGatewayPushToManyPostSuccess(){
+                global $response, $http_code;
+                $response = '515cabc3464af599972c65bc';
+                $http_code = array("http_code"=>'200');
+
+                $username = 'testuser';
+                $password = 'testuser';
+                $service_key = '82221';
+                $httpGatewayApi = new HttpGatewayApi($username, $password, $service_key);
+
+                $to = '6421859582';
+                $to2 = '6421859583';
+                $to_numbers = array($to, $to2);
+
+                $from_number = '8222';
+                $message = 'Hello World!';
+
+                $responses = $httpGatewayApi->pushToManyPost($message, $to_numbers, $from_number);
+                foreach($responses as $response){
+                        $this->assertEquals($response->response,"515cabc3464af599972c65bc");
+                        $this->assertEquals($response->http_code,"200");
+
+                }
+        }
+
+
 	public function testHTTPGatewayPushToManyUnauthorised(){
                 global $response, $http_code;
                 $response = 'Unauthorised';
@@ -87,7 +113,32 @@ class HTTPGatewayTest extends \PHPUnit_Framework_TestCase{
                 }
         }
 
+	public function testHTTPGatewayPushToManyPostUnauthorised(){
+                global $response, $http_code;
+                $response = 'Unauthorised';
+                $http_code = array("http_code"=>'401');
+
+                $username = 'testuser';
+                $password = 'testuser';
+                $service_key = '82221';
+                $httpGatewayApi = new HttpGatewayApi($username, $password, $service_key);
+
+                $to = '6421859582';
+                $to2 = '6421859583';
+                $to_numbers = array($to, $to2);
+
+                $from_number = '8222';
+                $message = 'Hello World!';
+
+                $responses = $httpGatewayApi->pushToManyPost($message, $to_numbers, $from_number);
+                foreach($responses as $response){
+                        $this->assertEquals($response->response,"Unauthorised");
+                        $this->assertEquals($response->http_code,"401");
+
+                }
+        }
 	
+
 	public function testHTTPGatewayDlrSuccess(){
 		global $response, $http_code;
 		$response = '{"id": "515cabc3464af599972c65bc", "status": "DELIVRD", "reason": "000"}';

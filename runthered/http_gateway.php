@@ -102,6 +102,40 @@ class HttpGatewayApi {
 		return $responses;
 	}
 
+	public function pushToManyPost($message, $to_numbers, $from_number=NULL, $billingCode=NULL, $partnerReference=NULL){
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_FTPLISTONLY, 1);
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+		curl_setopt($ch, CURLOPT_URL, $this->url . $this->service_key);
+                curl_setopt($ch, CURLOPT_USERPWD, $this->username . ":" . $this->password);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+                $responses = array();
+                foreach($to_numbers as $to){
+                        $data_to_submit = array();
+                        $data_to_submit['message'] = $message;
+                        $data_to_submit['to'] = $to;
+                        if (isset($from_number)){
+                                $data_to_submit['from'] = $from_number;
+                        }
+                        if (isset($billingCode)){
+                                $data_to_submit['billingCode'] = $billingCode;
+                        }
+                        if (isset($partnerReference)){
+                                $data_to_submit['partnerReference'] = $partnerReference;
+                        }
+			curl_setopt($ch, CURLOPT_POST, sizeof($data_to_submit));
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $data_to_submit);
+                        $output = curl_exec($ch);
+                        $info = curl_getinfo($ch);
+                        $http_code = $info['http_code'];
+                        $responseData = new ResponseData($output, $http_code);
+                        array_push($responses, $responseData);
+                }
+                curl_close($ch);
+                return $responses;
+        }
+
 	public function pushMessage($message, $to, $from_number=NULL, $billingCode=NULL, $partnerReference=NULL){
 		$data_to_post = array();
 		$data_to_post['message'] = $message;
